@@ -1,0 +1,6 @@
+import {simulate} from '../model.js';
+import {writeFileSync} from 'node:fs';
+const seeds=Array.from({length:20},(_,i)=>42+i*7919),conditions=[{name:'stable',churn:0,solidarity:20},{name:'moderate',churn:50,solidarity:20},{name:'fracture',churn:75,solidarity:20},{name:'high',churn:100,solidarity:20},{name:'high-no-buffer',churn:100,solidarity:0},{name:'high-buffered',churn:100,solidarity:100}];
+const runs=conditions.flatMap(c=>seeds.map(seed=>{const s=simulate({...c,seed});return{condition:c.name,seed,churn:c.churn,solidarity:c.solidarity,...s.metrics};}));
+const summary=conditions.map(c=>{const rows=runs.filter(r=>r.condition===c.name),stats={condition:c.name};for(const key of ['groups','largest','typical','isolated']){const v=rows.map(r=>r[key]).sort((a,b)=>a-b);stats[key]={min:v[0],median:(v[9]+v[10])/2,max:v.at(-1)};}return stats;});
+writeFileSync('audit.json',JSON.stringify({modelVersion:'1.0.0',description:'20 paired synthetic populations; 90 sweeps each; sensitivity analysis, not empirical validation',seeds,summary,runs},null,2));console.table(summary.map(x=>({condition:x.condition,groups:`${x.groups.median} [${x.groups.min}–${x.groups.max}]`,largest:x.largest.median.toFixed(3),typical:x.typical.median.toFixed(1),isolated:x.isolated.median})));

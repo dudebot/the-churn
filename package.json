@@ -1,0 +1,1 @@
+{"name":"the-churn","version":"1.0.0","private":true,"type":"module","scripts":{"test":"node tests/model.test.js","audit":"node tests/audit.js"}}

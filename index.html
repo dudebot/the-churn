@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101310">
+  <meta name="description" content="An interactive, research-informed model of social boundaries under pressure. Explore how confidence, bridging ties and shared fate change the shape of cooperation.">
+  <title>The Churn — the shape of belonging</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23101310'/%3E%3Ccircle cx='40' cy='48' r='28' fill='%23d3e99a'/%3E%3Ccircle cx='65' cy='59' r='21' fill='%23ea8a70' fill-opacity='.8'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#controls">Skip to controls</a>
+<header class="masthead"><a class="brand" href="./" aria-label="The Churn home"><span class="brand-icon">◌</span> FIELD NOTES <span class="edition">/ 001</span></a><nav><a href="#method">Model & evidence <span aria-hidden="true">↗</span></a><a href="https://github.com/dudebot/the-churn">Source <span aria-hidden="true">↗</span></a></nav></header>
+<main>
+  <section class="intro"><div><p class="eyebrow">A STUDY IN THE SHAPE OF BELONGING</p><h1>THE CHURN<span>.</span></h1></div><div class="intro-copy"><p>When the world comes apart,<br>what happens to <em>“us”?</em></p><span>Move the pressure. Watch the boundaries.</span></div></section>
+  <section class="laboratory" aria-label="Interactive social dynamics model">
+    <div class="field-wrap">
+      <div class="field-top"><span><i class="live-dot"></i> SYNTHETIC SOCIAL FIELD</span><span id="seed-label">SEED 0042 · 360 AGENTS</span></div>
+      <canvas id="field" tabindex="0" role="img" aria-describedby="map-description results" aria-label="Social field showing simulated agents and their cooperation groups"></canvas>
+      <p id="map-description" class="sr-only">Colored organic regions summarize connected groups in a simulated cooperation network. Dots are agents; faint lines are active ties. The fixed two dimensional projection can hide differences in other dimensions. Equivalent numerical results appear after the controls.</p>
+      <div class="field-note" id="field-note"><span class="note-line"></span><span id="field-caption">Boundaries are negotiated.<br>Belonging can overlap.</span></div>
+      <div class="inspection" id="inspection" hidden></div>
+      <div class="field-bottom"><span>FIXED INTENT PROJECTION <span aria-hidden="true">↗</span></span><div><span class="dot-key"></span> agents <span class="line-key"></span> active ties</div><button id="new-seed" class="text-button" title="Generate a new reproducible population">New population ↻</button></div>
+    </div>
+    <aside class="controls" id="controls">
+      <div class="control-heading"><p class="eyebrow">01 / APPLY PRESSURE</p><span id="busy" role="status">READY</span></div>
+      <div class="churn-title"><label for="churn">Churn</label><output id="churn-value" for="churn">75<span>/100</span></output></div>
+      <input id="churn" type="range" min="0" max="100" step="1" value="75" aria-describedby="churn-help">
+      <div class="range-ends"><span>STABILITY</span><span>BREAKDOWN</span></div>
+      <p class="control-help" id="churn-help">A scenario of narrowing tolerance and eroding bridges. Higher pressure makes cooperation more selective.</p>
+      <div class="presets" aria-label="Churn presets"><button data-churn="5">Open world</button><button data-churn="75">Fracture</button><button data-churn="95">Survival</button></div>
+      <div class="secondary"><div class="secondary-heading"><label for="solidarity">Shared fate & mutual aid</label><output id="solidarity-value" for="solidarity">20%</output></div><input id="solidarity" type="range" min="0" max="100" step="5" value="20"><p>Disaster can also widen “us.” Preserve bridges and broaden the circle of cooperation.</p></div>
+      <div class="context-row"><label for="context">Cooperation around</label><select id="context"><option value="all">All priorities</option><option value="material">Material needs</option><option value="values">Values & identity</option></select></div>
+      <div id="results" class="metrics" aria-live="polite" aria-atomic="true"><div><strong id="groups">—</strong><span>cooperation groups</span></div><div><strong id="largest">—</strong><span>in largest group</span></div><div><strong id="typical">—</strong><span>typical group size*</span></div><div><strong id="isolated">—</strong><span>isolated agents</span></div></div>
+      <p class="metric-foot">*Group size seen by a randomly chosen agent.</p>
+      <div class="reading"><span class="eyebrow">WHAT YOU’RE SEEING</span><p id="interpretation">Computing a matched scenario…</p></div>
+      <div class="actions"><button id="compare">Compare stable world</button><button id="export" class="text-button" title="Download reproducible model results as JSON">Export data ↓</button></div>
+      <p class="model-tag">Research-informed simulation <span>·</span> not a forecast</p>
+    </aside>
+  </section>
+  <section class="under-field"><p><span class="legend-swatch"></span> Color follows a cooperation group. Diffusion shows its footprint.<br><span class="muted">Proximity is initial similarity, not geography. Empty space is not uninhabited land.</span></p><p>Worse conditions → smaller tribes?<br><span class="muted">A hypothesis to explore, not a law of human behavior.</span></p></section>
+  <section id="method" class="method"><div class="method-intro"><p class="eyebrow">02 / UNDER THE SURFACE</p><h2>A mechanism.<br>Not a prophecy.</h2><p>The intuition is powerful: when trust becomes expensive, the circle of reliable cooperation can shrink. But shared danger also creates solidarity. This model lets those forces compete.</p></div><div class="evidence">
+    <details open><summary>What makes the blobs change?<span>01</span></summary><div id="model-details"><p>Agents have different priorities and a social network. They adjust their priorities after compatible encounters. Churn reduces the range of differences they will accept; incompatible ties can be replaced by more compatible ones. Shared fate preserves connections and expands tolerance.</p><p>Each setting reruns the same starting population for a fixed number of interactions. The slider compares conditions; it does not rewind a historical timeline.</p></div></details>
+    <details><summary>What is measured—and what is drawn?<span>02</span></summary><div><p>A cooperation group is a connected component of the remaining social network, including singletons. Connections are transitive: two members need not cooperate directly. At this finite horizon some incompatible ties can remain. Group count is not an estimate of real tribes, allegiance, hostility, or willingness to use violence.</p><p>The map fixes a two dimensional PCA projection of the starting synthetic priorities. It is not a PCA of real geopolitical data. Positions locate starting profiles, not current opinions. This reference layout keeps the same people in the same places across scenarios. Hidden dimensions still affect cooperation.</p><p>Colored fields use a fixed Gaussian kernel. Their shapes come from agent positions and group membership; the blur is not turned down by the churn slider. Colors identify groups within a scenario; the same color across scenarios does not prove group continuity. Mixed colors show projected proximity, not measured overlapping identity.</p></div></details>
+    <details><summary>What does the research actually support?<span>03</span></summary><div id="sources"><p>Sources and implementation notes are being loaded.</p></div></details>
+    <details><summary>Assumptions, limits & reproducibility<span>04</span></summary><div><p>This is an uncalibrated synthesis of published mechanisms, not a replication of one paper or a validated model of societal collapse. The mapping from churn to tolerance and rewiring is an explicit scenario assumption. No study establishes a universal scale from prosperous billions to survival pairs.</p><p>There are no real people, nations, parties, famine estimates, or population multipliers behind the dots. Mutual aid is a modeled counterforce, not a fitted intervention effect. Network connectedness does not measure emotional belonging or loneliness.</p><p>Export the seed, parameters, agents, edges and metrics to reproduce a run. The repository includes equations and a multi-seed sensitivity audit. Finite-time results can differ from eventual equilibrium.</p><a href="MODEL.md">Read the full model specification ↗</a></div></details>
+  </div></section>
+</main>
+<footer><span>THE CHURN <span class="muted">/ an explorable social hypothesis</span></span><span>Built for curiosity. Keep the uncertainty.</span></footer>
+<noscript><p class="noscript">This simulation needs JavaScript. The research discussion and full model specification remain available above.</p></noscript>
+<script type="module" src="app.js"></script>
+</body></html>
